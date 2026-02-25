@@ -1,0 +1,40 @@
+import os
+from dotenv import load_dotenv
+from frisk_sdk.adapters.langchain import Frisk
+from agent import build_agent
+from langchain_core.messages import HumanMessage
+from typing import Optional
+
+load_dotenv()
+
+
+def demo_run(question: Optional[str] = None) -> None:
+    """Run a demo interaction that forces the LLM to use multiple tools."""
+    frisk = Frisk(api_key=os.getenv("FRISK_API_KEY", ""),
+                   options={"redact_tool_args": ['path'],
+                            "redact_agent_state": ["redact_me"]
+                            })
+    frisk_session_id = frisk.create_session()
+    agent = build_agent(frisk=frisk)
+    user_input = question or (
+        "Add 4.5 and 7.25. Next, add 4.6 and 7.25, count the words in 'tool calling with langchain', "
+        "and show me the first few characters of agent.py."
+    )
+    print("User input:\n", user_input)
+    result = agent.invoke(
+        {
+            "messages": [HumanMessage(content=user_input)],
+            "user_id": "my_user_123",
+            "redact_me": "true",
+        }, # type: ignore
+        config={"callbacks": [frisk.callback_handler(session_id=frisk_session_id)]},
+        context={"frisk_session_id": frisk_session_id},
+    )
+    final_message = result["messages"][-1]
+    print("\nFinal answer:\n", getattr(final_message, "content", final_message))
+    frisk.shutdown()
+
+
+if __name__ == "__main__":
+    demo_run()
+    

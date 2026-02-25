@@ -1,0 +1,16 @@
+[project]
+name = "basic-langchain-agent"
+version = "0.1.0"
+description = "FriskAI basic langchain agent example"
+readme = "README.md"
+requires-python = "==3.13.*"
+dependencies = [
+    "langchain>=1.2.3",
+    "langchain-ollama>=1.0.1",
+    "langchain-openai>=1.1.7",
+    "frisk-sdk>=0.1.4",    
+    "python-dotenv>=1.2.1",
+]
+
+[tool.pyright]
+strictListInference = true
