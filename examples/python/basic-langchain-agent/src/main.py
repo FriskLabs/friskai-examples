@@ -13,30 +13,30 @@ DEFAULT_PROMPT = (
     "and tell me the username for user ID 42 and then user ID 43"
 )
 
+
 def demo_run(question: Optional[str] = None) -> None:
     """Run a demo interaction that forces the LLM to use multiple tools."""
-    frisk = Frisk(api_key=os.getenv("FRISK_API_KEY", ""),
-                   options={"redact_tool_args": ['path'],
-                            "redact_agent_state": ["redact_me"]
-                            })
+    frisk = Frisk(
+        api_key=os.getenv("FRISK_API_KEY", ""),
+        options={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
+    )
     frisk_session_id = frisk.create_session()
     agent = build_agent(frisk=frisk)
     user_input = question or DEFAULT_PROMPT
-    print("User input:\n", user_input)
+    print("User input:", user_input)
     result = agent.invoke(
         {
             "messages": [HumanMessage(content=user_input)],
             "user_id": "42",
             "redact_me": "true",
-        }, # type: ignore
+        },  # type: ignore
         config={"callbacks": [frisk.callback_handler(session_id=frisk_session_id)]},
-        context={"frisk_session_id": frisk_session_id}, # type: ignore
+        context={"frisk_session_id": frisk_session_id},  # type: ignore
     )
     final_message = result["messages"][-1]
-    print("\nFinal answer:\n", getattr(final_message, "content", final_message))
+    print("\nLLM answer:", getattr(final_message, "content", final_message))
     frisk.shutdown()
 
 
 if __name__ == "__main__":
     demo_run()
-    

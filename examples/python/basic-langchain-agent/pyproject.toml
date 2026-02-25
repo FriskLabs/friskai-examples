@@ -8,9 +8,14 @@ dependencies = [
     "langchain>=1.2.3",
     "langchain-ollama>=1.0.1",
     "langchain-openai>=1.1.7",
-    "frisk-sdk>=0.1.5",    
+    "langchain-aws>=1.2.0",
+    "langchain-anthropic>=0.3.0",
+    "frisk-sdk>=0.1.6",
     "python-dotenv>=1.2.1",
 ]
 
 [tool.pyright]
 strictListInference = true
+
+[tool.ty.environment]
+root = ["./src"]

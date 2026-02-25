@@ -6,14 +6,16 @@ from prompt import system_prompt
 from frisk_sdk.adapters.langchain import Frisk
 from langchain.agents import create_agent, AgentState
 
+
 class MyAgentState(AgentState):
     user_id: str
     redact_me: str
 
+
 @dataclass
 class CustomContext:
     frisk_session_id: UUID
-    
+
 
 def build_agent(
     frisk: Frisk,

@@ -1,22 +1,26 @@
 from pathlib import Path
-from typing import Any, Callable
+from langchain.tools import tool, BaseTool
 
 
+@tool
 def lookup_username(user_id: int) -> str:
     """Function to look up a username by user ID."""
     return f"user_{user_id}"
 
 
+@tool
 def add_numbers(a: float, b: float) -> float:
     """Add two numbers and return the sum."""
     return a + b
 
 
+@tool
 def word_count(text: str) -> int:
     """Count the number of words in the provided text."""
     return len(text.split())
 
 
+@tool
 def read_snippet(path: str, max_chars: int = 240) -> str:
     """Read up to max_chars from a local file. Paths are resolved relative to the current working directory."""
     file_path = Path(f"src/{path}").expanduser().resolve()
@@ -30,7 +34,7 @@ def read_snippet(path: str, max_chars: int = 240) -> str:
     return snippet
 
 
-llm_tools: list[Callable[..., Any]] = [
+llm_tools: list[BaseTool] = [
     lookup_username,
     add_numbers,
     word_count,

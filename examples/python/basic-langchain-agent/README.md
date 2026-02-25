@@ -8,6 +8,7 @@ This demo agent performs simple tasks using multiple tools:
 - **Mathematical operations**: Add numbers together
 - **Text analysis**: Count words in a string
 - **File operations**: Read snippets from local files
+- **Username lookup**: returns username
 
 The agent is instrumented with FriskAI to provide full observability into tool calls, agent state, and execution flow.
 
@@ -30,7 +31,7 @@ The agent is instrumented with FriskAI to provide full observability into tool c
 - Python 3.13
 - [uv](https://docs.astral.sh/uv/) package manager
 - FriskAI API key
-- OpenAI API key (optional, falls back to Ollama)
+- LLM provider credentials (OpenAI API key, AWS credentials for Bedrock, Anthropic API key, or local Ollama installation)
 
 ## Setup
 
@@ -49,10 +50,29 @@ The agent is instrumented with FriskAI to provide full observability into tool c
    cp .env.example .env
    ```
 
-   Edit `.env` and add your API keys:
+   Edit `.env` and configure your LLM provider:
    ```bash
    FRISK_API_KEY="your-frisk-api-key"
-   OPENAI_API_KEY="your-openai-api-key"  # Optional
+   
+   # Set your LLM provider (openai, bedrock, anthropic, or ollama)
+   LLM_PROVIDER="openai"  # or "bedrock" or "anthropic" or "ollama"
+   
+   # For OpenAI
+   OPENAI_API_KEY="your-openai-api-key"
+   OPENAI_MODEL="gpt-5-nano"  # Optional, defaults to gpt-5-nano
+   
+   # For Amazon Bedrock
+   AWS_REGION="us-east-1"
+   AWS_ACCESS_KEY_ID="your-aws-access-key"
+   AWS_SECRET_ACCESS_KEY="your-aws-secret-key"
+   BEDROCK_MODEL_ID="qwen.qwen3-235b-a22b-2507-v1:0"  # Optional
+   
+   # For Anthropic
+   ANTHROPIC_API_KEY="your-anthropic-api-key"
+   ANTHROPIC_MODEL="claude-3-5-sonnet-20241022"  # Optional
+   
+   # For Ollama
+   OLLAMA_MODEL="gpt-oss:20b"  # Optional, defaults to gpt-oss:20b
    ```
 
    Optional FriskAI configuration:
@@ -169,7 +189,17 @@ llm_tools = [add_numbers, word_count, read_snippet, my_custom_tool]
 
 ### Changing the LLM
 
-Modify `src/llm.py` to use different models or providers. The example supports OpenAI and Ollama out of the box.
+Set the `LLM_PROVIDER` environment variable to choose your provider:
+- `openai` - Uses OpenAI models (requires `OPENAI_API_KEY`)
+- `bedrock` - Uses Amazon Bedrock models (requires AWS credentials)
+- `anthropic` - Uses Anthropic models directly (requires `ANTHROPIC_API_KEY`)
+- `ollama` - Uses local Ollama models (default if not specified)
+
+You can also customize the specific model using provider-specific environment variables:
+- OpenAI: `OPENAI_MODEL` (default: `gpt-5-nano`)
+- Bedrock: `BEDROCK_MODEL_ID` (default: `qwen.qwen3-235b-a22b-2507-v1:0`)
+- Anthropic: `ANTHROPIC_MODEL` (default: `claude-3-5-sonnet-20241022`)
+- Ollama: `OLLAMA_MODEL` (default: `gpt-oss:20b`)
 
 ### Customizing Redaction
 
