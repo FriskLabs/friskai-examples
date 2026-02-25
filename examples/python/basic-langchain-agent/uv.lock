@@ -46,7 +46,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "frisk-sdk", specifier = ">=0.1.4" },
+    { name = "frisk-sdk", specifier = ">=0.1.5" },
     { name = "langchain", specifier = ">=1.2.3" },
     { name = "langchain-ollama", specifier = ">=1.0.1" },
     { name = "langchain-openai", specifier = ">=1.1.7" },
@@ -116,7 +116,7 @@ wheels = [
 
 [[package]]
 name = "frisk-sdk"
-version = "0.1.4"
+version = "0.1.5"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asyncio" },
@@ -130,10 +130,10 @@ dependencies = [
     { name = "pydantic" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f2/4d/a081911bfea8481f595bb65c3ae1f4b25c9050989101346d9692dd6f3f15/frisk_sdk-0.1.4.tar.gz", hash = "sha256:c0ab8f2b9147a174a175ad9839b06dc298593acf1b091630970da95888365f8d", size = 206362, upload-time = "2026-02-18T18:34:30.645Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/93/2f28d1ef863e19345eac75444543073dcf303eb04c949417b93b5140d4ed/frisk_sdk-0.1.5.tar.gz", hash = "sha256:617ef683e625742f96223de397a694f583041dad9da29b6744a60a1e1a0fc8da", size = 208351, upload-time = "2026-02-25T16:58:49.155Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/de/50/98695a1102ba30197a6c5c11808067edda222b00a9a8dc1469626e32ec6f/frisk_sdk-0.1.4-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:b74be2267bf1e53e486a0d9a7abc599fbe70f6bce61a622355120b4f2eca41a4", size = 4133222, upload-time = "2026-02-18T18:34:26.507Z" },
-    { url = "https://files.pythonhosted.org/packages/8d/7f/0b62f0d44f36d9f95f0f09104bfb1906e012bc6a5d1fdab463f995374b7c/frisk_sdk-0.1.4-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:ffcd7004e272d8dd1818afb7cddecfa051c697f70ae0f73dca122d80004406ef", size = 4016196, upload-time = "2026-02-18T18:34:28.921Z" },
+    { url = "https://files.pythonhosted.org/packages/c8/1e/433e96f2e70bbc710659e7772a4b5fbbe0507cd57ea56cd110aec9b72070/frisk_sdk-0.1.5-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:0a94b26c884238ba0c8d07cb567eaaf70fd26240aec0cf1c3b795e2556662dff", size = 2346801, upload-time = "2026-02-25T16:58:45.832Z" },
+    { url = "https://files.pythonhosted.org/packages/bf/60/d45b0bad24840db0a4ea594a97bf7de7905d7c137ba8a38fe52ec10cd40b/frisk_sdk-0.1.5-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:ab93decd22b02750f43fa0e756361e3975a3a203763a3a90a3ab47b97b18c2af", size = 2267577, upload-time = "2026-02-25T16:58:47.725Z" },
 ]
 
 [[package]]

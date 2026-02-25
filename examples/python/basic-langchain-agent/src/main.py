@@ -7,6 +7,11 @@ from typing import Optional
 
 load_dotenv()
 
+DEFAULT_PROMPT = (
+    "Add 4.5 and 7.25. Count the words in "
+    "'how many words are in this sentence?', show me the first few characters of agent.py, "
+    "and tell me the username for user ID 42 and then user ID 43"
+)
 
 def demo_run(question: Optional[str] = None) -> None:
     """Run a demo interaction that forces the LLM to use multiple tools."""
@@ -16,19 +21,16 @@ def demo_run(question: Optional[str] = None) -> None:
                             })
     frisk_session_id = frisk.create_session()
     agent = build_agent(frisk=frisk)
-    user_input = question or (
-        "Add 4.5 and 7.25. Next, add 4.6 and 7.25, count the words in 'tool calling with langchain', "
-        "and show me the first few characters of agent.py."
-    )
+    user_input = question or DEFAULT_PROMPT
     print("User input:\n", user_input)
     result = agent.invoke(
         {
             "messages": [HumanMessage(content=user_input)],
-            "user_id": "my_user_123",
+            "user_id": "42",
             "redact_me": "true",
         }, # type: ignore
         config={"callbacks": [frisk.callback_handler(session_id=frisk_session_id)]},
-        context={"frisk_session_id": frisk_session_id},
+        context={"frisk_session_id": frisk_session_id}, # type: ignore
     )
     final_message = result["messages"][-1]
     print("\nFinal answer:\n", getattr(final_message, "content", final_message))

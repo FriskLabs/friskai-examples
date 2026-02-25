@@ -20,7 +20,7 @@ def build_agent(
 ):
     agent = create_agent(
         model=get_llm(),
-        tools=llm_tools,
+        tools=frisk.wrap_tools(llm_tools),
         system_prompt=system_prompt,
         state_schema=MyAgentState,
         middleware=[frisk.tool_middleware()],

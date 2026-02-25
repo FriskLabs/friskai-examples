@@ -2,6 +2,11 @@ from pathlib import Path
 from typing import Any, Callable
 
 
+def lookup_username(user_id: int) -> str:
+    """Function to look up a username by user ID."""
+    return f"user_{user_id}"
+
+
 def add_numbers(a: float, b: float) -> float:
     """Add two numbers and return the sum."""
     return a + b
@@ -25,4 +30,9 @@ def read_snippet(path: str, max_chars: int = 240) -> str:
     return snippet
 
 
-llm_tools: list[Callable[..., Any]] = [add_numbers, word_count, read_snippet]
+llm_tools: list[Callable[..., Any]] = [
+    lookup_username,
+    add_numbers,
+    word_count,
+    read_snippet,
+]

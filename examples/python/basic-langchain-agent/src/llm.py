@@ -9,7 +9,7 @@ def get_llm():
         print("Using OpenAI LLM as OPENAI_API_KEY is set.")
         llm = ChatOpenAI(
             temperature=0.0,
-            model="gpt-4.1-nano",
+            model="gpt-5-nano",
         )
     else:
         print("Using Ollama LLM as OPENAI_API_KEY is not set.")
