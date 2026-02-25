@@ -34,9 +34,17 @@ def read_snippet(path: str, max_chars: int = 240) -> str:
     return snippet
 
 
+@tool
+def log_message(message: str) -> str:
+    """Log a message to the console (simulating an external logging tool)."""
+    print(f"LOG: {message}")
+    return "Message logged successfully."
+
+
 llm_tools: list[BaseTool] = [
     lookup_username,
     add_numbers,
     word_count,
     read_snippet,
+    log_message,
 ]

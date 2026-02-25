@@ -10,7 +10,8 @@ load_dotenv()
 DEFAULT_PROMPT = (
     "Add 4.5 and 7.25. Count the words in "
     "'how many words are in this sentence?', show me the first few characters of agent.py, "
-    "and tell me the username for user ID 42 and then user ID 43"
+    "tell me the username for user ID 42 and then user ID 43,"
+    "and log the message 'Looked up user by social security number 123-45-6789'."
 )
 
 
