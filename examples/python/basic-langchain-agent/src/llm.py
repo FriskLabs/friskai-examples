@@ -14,6 +14,7 @@ def get_llm():
         llm = ChatOpenAI(
             model=os.getenv("OPENAI_MODEL", "gpt-5-nano"),
             temperature=0.0,
+            streaming=True,
         )
     elif provider == "bedrock":
         print("Using Amazon Bedrock LLM (LLM_PROVIDER=bedrock).")
@@ -21,12 +22,16 @@ def get_llm():
             model=os.getenv("BEDROCK_MODEL_ID", "qwen.qwen3-32b-v1:0"),
             temperature=0.0,
             region_name=os.getenv("AWS_REGION", "us-east-1"),
+            disable_streaming=False,
         )
     elif provider == "anthropic":
         print("Using Anthropic LLM (LLM_PROVIDER=anthropic).")
         llm = ChatAnthropic(
-            model=os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-20241022"),
+            model_name=os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-20241022"),
             temperature=0.0,
+            streaming=True,
+            timeout=30000,
+            stop=None,
         )
     else:
         print("LLM_PROVIDER not set or invalid. Defaulting to Ollama.")

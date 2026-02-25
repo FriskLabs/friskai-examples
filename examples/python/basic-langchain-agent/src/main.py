@@ -25,7 +25,9 @@ def demo_run(question: Optional[str] = None) -> None:
     agent = build_agent(frisk=frisk)
     user_input = question or DEFAULT_PROMPT
     print("User input:", user_input)
-    result = agent.invoke(
+    print("\nLLM answer: ", end="", flush=True)
+
+    for event in agent.stream(
         {
             "messages": [HumanMessage(content=user_input)],
             "user_id": "42",
@@ -33,9 +35,19 @@ def demo_run(question: Optional[str] = None) -> None:
         },  # type: ignore
         config={"callbacks": [frisk.callback_handler(session_id=frisk_session_id)]},
         context={"frisk_session_id": frisk_session_id},  # type: ignore
-    )
-    final_message = result["messages"][-1]
-    print("\nLLM answer:", getattr(final_message, "content", final_message))
+        stream_mode="messages",
+    ):
+        message, metadata = event
+        if metadata.get("langgraph_node") == "model" and hasattr(message, "content"):
+            content = message.content
+            if isinstance(content, str) and content:
+                print(content, end="", flush=True)
+            elif isinstance(content, list):
+                for item in content:
+                    if isinstance(item, dict) and item.get("type") == "text":
+                        print(item.get("text", ""), end="", flush=True)
+
+    print()  # New line after streaming
     frisk.shutdown()
 
 
