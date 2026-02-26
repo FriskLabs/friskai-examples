@@ -1,0 +1,18 @@
+[project]
+name = "basic-strands-agent"
+version = "0.1.0"
+description = "Basic Strands agent example"
+readme = "README.md"
+requires-python = "==3.13.*"
+dependencies = [
+    "strands-agents>=0.2.0",
+    "strands-agents-tools>=0.2.0",
+    "python-dotenv>=1.2.1",
+    "frisk-sdk>=0.1.8",
+]
+
+[tool.pyright]
+strictListInference = true
+
+[tool.ty.environment]
+root = ["./src"]
