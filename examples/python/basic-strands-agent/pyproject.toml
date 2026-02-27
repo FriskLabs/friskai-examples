@@ -16,3 +16,4 @@ strictListInference = true
 
 [tool.ty.environment]
 root = ["./src"]
+
