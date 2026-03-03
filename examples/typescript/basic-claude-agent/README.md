@@ -1,12 +1,12 @@
-# Basic LangChain Agent with FriskAI
+# Basic Claude Agent with FriskAI
 
-A complete working example of a LangChain agent integrated with FriskAI. This example demonstrates how to build an AI agent with multiple tools and deploy it with real-time governance, control, and observability.
+A complete working example of a Claude agent integrated with FriskAI. This example demonstrates how to build an AI agent with multiple tools and deploy it with real-time governance, control, and observability.
 
 **About FriskAI**: FriskAI enables enterprises to deploy AI agents in high-stakes environments with confidence. Our platform provides real-time governance, control, and observability across agent tool calls.
 
 ## Overview
 
-This example showcases a fully functional LangChain agent that uses multiple tools to complete complex tasks. The agent can:
+This example showcases a fully functional Claude agent that uses multiple tools to complete complex tasks. The agent can:
 
 - **Mathematical operations**: Add numbers together
 - **Text analysis**: Count words in strings
@@ -22,11 +22,10 @@ The agent is instrumented with FriskAI to provide observability, session managem
 - **Real-time Governance**: Control and monitor agent behavior in production
 - **Tool Observability**: Complete visibility into all agent tool calls
 - **Session Management**: Automatic session creation and tracking
-- **Guard Middleware**: Real-time validation and control of tool execution
 - **Data Redaction**: Configurable redaction of sensitive tool arguments and agent state
-- **Callback Handlers**: Built-in callback handler for capturing LangChain events
+- **Runtime Hooks**: Built-in callback handler for capturing Claude events and validating and controlling tool execution
 
-### LangChain Components
+### Claude Components
 - **Custom Agent State**: Extended state schema with `userId` and `redactMe` fields
 - **Multi-LLM Support**: Supports OpenAI, Amazon Bedrock, Anthropic, or Ollama
 - **Streaming Output**: Real-time streaming of agent responses
@@ -301,14 +300,13 @@ Modify the `DEFAULT_PROMPT` in `src/main.ts` or pass a custom question to the `d
 
 - [FriskAI Documentation](https://docs.frisk.ai)
 - [FriskAI SDK on NPM](https://www.npmjs.com/package/@friskai/frisk-js)
-- [LangChain JS Documentation](https://js.langchain.com)
-- [LangChain Agents Guide](https://js.langchain.com/docs/modules/agents/)
+- [Claude Agent SDK Documentation](https://platform.claude.com/docs/en/agent-sdk/typescript)
 
 ## Support
 
 For questions or issues:
 - FriskAI: Visit [docs.frisk.ai](https://docs.frisk.ai) or contact support
-- LangChain: Check [js.langchain.com](https://js.langchain.com)
+- Claude Agent SDK: Check [platform.claude.com/docs](https://platform.claude.com/docs/en/agent-sdk/typescript)
 
 ## License
 
