@@ -18,9 +18,9 @@ DEFAULT_PROMPT = (
 async def demo_run(question: Optional[str] = None) -> None:
     frisk = Frisk(
         api_key=os.getenv("FRISK_API_KEY", ""),
-        options={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
+        redact={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
     )
-    frisk_session_id = frisk.create_session()
+    frisk_session = frisk.session()
 
     """Run a demo interaction that forces the agent to use multiple tools."""
     agent = build_agent(frisk=frisk)
@@ -31,7 +31,7 @@ async def demo_run(question: Optional[str] = None) -> None:
     agent_stream = agent.stream_async(
         user_input,
         invocation_state={
-            "frisk_session_id": frisk_session_id,
+            "frisk_session_id": frisk_session.id,
             "redact_me": "This should be redacted in the logs",
             "user_id": "42",
         },

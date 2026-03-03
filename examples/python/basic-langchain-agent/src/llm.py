@@ -10,32 +10,37 @@ def get_llm():
     provider = os.getenv("LLM_PROVIDER", "").lower()
 
     if provider == "openai":
-        print("Using OpenAI LLM (LLM_PROVIDER=openai).")
+        model = os.getenv("OPENAI_MODEL") or "gpt-5-nano"
+        print(f"Using OpenAI LLM (LLM_PROVIDER=openai) with model {model}.")
         llm = ChatOpenAI(
-            model=os.getenv("OPENAI_MODEL", "gpt-5-nano"),
+            model=model,
             temperature=0.0,
             streaming=True,
         )
     elif provider == "bedrock":
-        print("Using Amazon Bedrock LLM (LLM_PROVIDER=bedrock).")
+        model = os.getenv("BEDROCK_MODEL_ID") or "qwen.qwen3-32b-v1:0"
+        print(f"Using Amazon Bedrock LLM (LLM_PROVIDER=bedrock) with model {model}.")
         llm = ChatBedrockConverse(
-            model=os.getenv("BEDROCK_MODEL_ID", "qwen.qwen3-32b-v1:0"),
+            model=model,
             temperature=0.0,
             region_name=os.getenv("AWS_REGION", "us-east-1"),
             disable_streaming=False,
         )
     elif provider == "anthropic":
-        print("Using Anthropic LLM (LLM_PROVIDER=anthropic).")
+        model = os.getenv("ANTHROPIC_MODEL") or "claude-3-5-sonnet-20241022"
+        print(f"Using Anthropic LLM (LLM_PROVIDER=anthropic). Using model {model}")
         llm = ChatAnthropic(
-            model_name=os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-20241022"),
+            model_name=model,
             temperature=0.0,
             streaming=True,
             timeout=30000,
             stop=None,
         )
     else:
-        print("LLM_PROVIDER not set or invalid. Defaulting to Ollama.")
+        model = os.getenv("OLLAMA_MODEL") or "gpt-oss:20b"
+        print(f"LLM_PROVIDER not set or invalid. Defaulting to Ollama. Using model {model}")
         llm = ChatOllama(
-            model=os.getenv("OLLAMA_MODEL", "gpt-oss:20b"), temperature=0.0
+            model=model,
+            temperature=0.0
         )
     return llm

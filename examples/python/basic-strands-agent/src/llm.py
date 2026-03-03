@@ -7,37 +7,41 @@ def get_model():
     provider = os.getenv("LLM_PROVIDER", "").lower()
 
     if provider == "openai":
-        print("Using OpenAI model (LLM_PROVIDER=openai).")
         from strands.models.openai import OpenAIModel
+        model = os.getenv("OPENAI_MODEL") or "gpt-5-nano"
+        print(f"Using OpenAI LLM (LLM_PROVIDER=openai) with model {model}.")
 
-        model = OpenAIModel(
-            model_id=os.getenv("OPENAI_MODEL", "gpt-5-nano"),
+        llm = OpenAIModel(
+            model_id=model,
             params={"temperature": 0.0},
         )
     elif provider == "bedrock":
-        print("Using Amazon Bedrock model (LLM_PROVIDER=bedrock).")
-        model = BedrockModel(
-            model_id=os.getenv("BEDROCK_MODEL_ID", "qwen.qwen3-32b-v1:0"),
+        model = os.getenv("BEDROCK_MODEL_ID") or "qwen.qwen3-32b-v1:0"
+        print(f"Using Amazon Bedrock LLM (LLM_PROVIDER=bedrock) with model {model}.")
+        llm = BedrockModel(
+            model_id=model,
             temperature=0.0,
             region_name=os.getenv("AWS_REGION", "us-east-1"),
             streaming=True,
         )
     elif provider == "anthropic":
-        print("Using Anthropic model (LLM_PROVIDER=anthropic).")
         from strands.models.anthropic import AnthropicModel
+        model = os.getenv("ANTHROPIC_MODEL") or "claude-3-5-sonnet-20241022"
+        print(f"Using Anthropic LLM (LLM_PROVIDER=anthropic). Using model {model}")
 
-        model = AnthropicModel(
-            model_id=os.getenv("ANTHROPIC_MODEL", "claude-3-5-sonnet-20241022"),
+        llm = AnthropicModel(
+            model_id=model,
             max_tokens=4096,
             params={"temperature": 0.0},
         )
     else:
-        print("LLM_PROVIDER not set or invalid. Defaulting to Ollama.")
         from strands.models.ollama import OllamaModel
+        model = os.getenv("OLLAMA_MODEL") or "gpt-oss:20b"
+        print(f"LLM_PROVIDER not set or invalid. Defaulting to Ollama. Using model {model}")
 
-        model = OllamaModel(
+        llm = OllamaModel(
             host="http://localhost:11434",
-            model_id=os.getenv("OLLAMA_MODEL", "gpt-oss:20b"),
+            model_id=model,
             temperature=0.0,
         )
-    return model
+    return llm
