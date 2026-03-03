@@ -1,12 +1,10 @@
 import { Frisk } from '@friskai/frisk-js/claude'
-import { HumanMessage } from '@langchain/core/messages'
-import { buildAgent } from './agent.js'
 import { createSdkMcpServer, query } from '@anthropic-ai/claude-agent-sdk'
 import {llmTools} from "./tools.ts";
 
 const DEFAULT_PROMPT =
   'Add 4.5 and 7.25. Count the words in ' +
-  "'how many words are in this sentence?', show me the first few characters of agent.ts, " +
+  "'how many words are in this sentence?', show me the first few characters of main.ts, " +
   'tell me the username for user ID 42 and then user ID 43, ' +
   "and log the message 'Looked up user by social security number 123-45-6789'."
 
