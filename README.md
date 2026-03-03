@@ -10,7 +10,7 @@ FriskAI provides real-time governance, human-in-the-loop control, and observabil
 - **Tool Observability**: Automatic instrumentation of agent tools
 - **Data Redaction**: Protect sensitive information in logs and traces
 - **Performance Metrics**: Track latency, token usage, and costs
-- **Debugging**: Inspect agent state, tool calls, and execution flow
+- **Debugging**: Inspect agent state, tool calls, and execution flow[README.md](examples/python/basic-langchain-agent/README.md)
 
 ## Examples
 

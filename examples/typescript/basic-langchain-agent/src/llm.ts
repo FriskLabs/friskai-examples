@@ -7,10 +7,11 @@ export function getLLM() {
   const provider = (process.env.LLM_PROVIDER || '').toLowerCase()
 
   if (provider === 'openai') {
-    console.log('Using OpenAI LLM (LLM_PROVIDER=openai).')
+    let model = process.env.OPENAI_MODEL || 'gpt-5-nano';
+    console.log(`Using OpenAI LLM (LLM_PROVIDER=openai). Using model ${model}.`)
     return new ChatOpenAI({
-      model: process.env.OPENAI_MODEL || 'gpt-5-nano',
-      temperature: 0.0,
+      model,
+      temperature: model === 'gpt-5-nano' ? 1.0 : 0.0,
       streaming: true,
     })
   } else if (provider === 'bedrock') {

@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from uuid_utils import UUID
 from tools import llm_tools
 from llm import get_llm
@@ -12,11 +11,6 @@ class MyAgentState(AgentState):
     redact_me: str
 
 
-@dataclass
-class CustomContext:
-    frisk_session_id: UUID
-
-
 def build_agent(
     frisk: Frisk,
 ):
@@ -25,6 +19,6 @@ def build_agent(
         tools=frisk.wrap_tools(llm_tools),
         system_prompt=system_prompt,
         state_schema=MyAgentState,
-        middleware=[frisk.tool_middleware()],
+        middleware=[frisk.guard()],
     )
     return agent

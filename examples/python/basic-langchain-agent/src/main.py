@@ -19,9 +19,9 @@ def demo_run(question: Optional[str] = None) -> None:
     """Run a demo interaction that forces the LLM to use multiple tools."""
     frisk = Frisk(
         api_key=os.getenv("FRISK_API_KEY", ""),
-        options={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
+        redact={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
     )
-    frisk_session_id = frisk.create_session()
+    frisk_session = frisk.session()
     agent = build_agent(frisk=frisk)
     user_input = question or DEFAULT_PROMPT
     print("User input:", user_input)
@@ -33,8 +33,8 @@ def demo_run(question: Optional[str] = None) -> None:
             "user_id": "42",
             "redact_me": "true",
         },  # type: ignore
-        config={"callbacks": [frisk.callback_handler(session_id=frisk_session_id)]},
-        context={"frisk_session_id": frisk_session_id},  # type: ignore
+        config={"callbacks": [frisk_session.callbacks]},
+        context=frisk_session.context,  # type: ignore
         stream_mode="messages",
     ):
         message, metadata = event
@@ -52,4 +52,8 @@ def demo_run(question: Optional[str] = None) -> None:
 
 
 if __name__ == "__main__":
-    demo_run()
+    import sys
+    question = None
+    if len(sys.argv) > 1:
+        question = sys.argv[1]
+    demo_run(question)

@@ -115,15 +115,15 @@ source = { virtual = "." }
 dependencies = [
     { name = "frisk-sdk" },
     { name = "python-dotenv" },
-    { name = "strands-agents" },
+    { name = "strands-agents", extra = ["ollama"] },
     { name = "strands-agents-tools" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "frisk-sdk", specifier = ">=0.1.8" },
+    { name = "frisk-sdk", specifier = ">=0.2.0" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
-    { name = "strands-agents", specifier = ">=0.2.0" },
+    { name = "strands-agents", extras = ["ollama"], specifier = ">=0.2.0" },
     { name = "strands-agents-tools", specifier = ">=0.2.0" },
 ]
 
@@ -323,7 +323,7 @@ wheels = [
 
 [[package]]
 name = "frisk-sdk"
-version = "0.1.8"
+version = "0.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asyncio" },
@@ -338,10 +338,10 @@ dependencies = [
     { name = "requests" },
     { name = "strands-agents" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/d1/93/ed80342cc739aa88374194618f7ac9fbb9e3170bfbfa3b61606d83280da9/frisk_sdk-0.1.8.tar.gz", hash = "sha256:167eaff5567274c9fc64eb8afaf325a6affc7ac8aaf89e9a101e4655872449f7", size = 254346, upload-time = "2026-02-27T00:33:59.047Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8c/bb/4a2c849880cd8a60d0780b9accc5606608624fc9a4fe69e54fa244a01f60/frisk_sdk-0.2.0.tar.gz", hash = "sha256:c2dafbf26d945f1df8f164a45032e75ba59b51f83ba31f2b1f2997141e1defba", size = 255512, upload-time = "2026-03-03T18:48:18.271Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8f/c3/1512734329329d374395429066067acf6d736579d189abcc8cc392457002/frisk_sdk-0.1.8-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:04e822ba451469f7b87165c9c22e1341afce677b918cedfb1224a5b7414803d6", size = 2354752, upload-time = "2026-02-27T00:33:55.648Z" },
-    { url = "https://files.pythonhosted.org/packages/15/1d/1388d1254e665a24ee5392dbada3786c84e6984d4cc01f9d8df8d2894b68/frisk_sdk-0.1.8-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:a1a5ff0e14478a8bc1b65ed1efe5fe3222b092260f18c10b44870cd9e77b9bc9", size = 2275525, upload-time = "2026-02-27T00:33:57.789Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/b5/bada7c8a37cb18cd1f5fd2deb52ef8e38dea6a06b58e7b658509a9e9e431/frisk_sdk-0.2.0-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:e290409a857e56adcb272766be50fec2cd7b68d7991e6793792d70d7450349fc", size = 2357193, upload-time = "2026-03-03T18:48:14.832Z" },
+    { url = "https://files.pythonhosted.org/packages/ea/73/dce819d0c13476f268ff6c984f188e3cdd71e6c16422de336f34b86358c0/frisk_sdk-0.2.0-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:27834dbf44d1a002b7a3cf9a6d6106c043fefeced29e630b878720b55b78043d", size = 2277967, upload-time = "2026-03-03T18:48:16.96Z" },
 ]
 
 [[package]]
@@ -802,6 +802,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ac/5b/2d2d1d522e51285bd61b1e20df8f47ae1a9d80839db0b24ea783b3832832/multidict-6.7.1-cp313-cp313t-win_amd64.whl", hash = "sha256:d54ecf9f301853f2c5e802da559604b3e95bb7a3b01a9c295c6ee591b9882de8", size = 53109, upload-time = "2026-01-26T02:45:08.044Z" },
     { url = "https://files.pythonhosted.org/packages/3d/a3/cc409ba012c83ca024a308516703cf339bdc4b696195644a7215a5164a24/multidict-6.7.1-cp313-cp313t-win_arm64.whl", hash = "sha256:5a37ca18e360377cfda1d62f5f382ff41f2b8c4ccb329ed974cc2e1643440118", size = 45573, upload-time = "2026-01-26T02:45:09.349Z" },
     { url = "https://files.pythonhosted.org/packages/81/08/7036c080d7117f28a4af526d794aab6a84463126db031b007717c1a6676e/multidict-6.7.1-py3-none-any.whl", hash = "sha256:55d97cc6dae627efa6a6e548885712d4864b81110ac76fa4e534c03819fa4a56", size = 12319, upload-time = "2026-01-26T02:46:44.004Z" },
+]
+
+[[package]]
+name = "ollama"
+version = "0.6.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/9d/5a/652dac4b7affc2b37b95386f8ae78f22808af09d720689e3d7a86b6ed98e/ollama-0.6.1.tar.gz", hash = "sha256:478c67546836430034b415ed64fa890fd3d1ff91781a9d548b3325274e69d7c6", size = 51620, upload-time = "2025-11-13T23:02:17.416Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/47/4f/4a617ee93d8208d2bcf26b2d8b9402ceaed03e3853c754940e2290fed063/ollama-0.6.1-py3-none-any.whl", hash = "sha256:fc4c984b345735c5486faeee67d8a265214a31cbb828167782dc642ce0a2bf8c", size = 14354, upload-time = "2025-11-13T23:02:16.292Z" },
 ]
 
 [[package]]
@@ -1461,6 +1474,11 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/9e/27/9c1c114a83844f9e27fe0312bfdad27c753b922f123512669997f8af47e3/strands_agents-1.28.0.tar.gz", hash = "sha256:0372d8f75d694f3230b0035867455ef31c74f6d9c708985e41f646a1a0b29f7e", size = 717116, upload-time = "2026-02-25T19:36:46.959Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/b3/98/f4f87500251f1cab2bd9a0d271852d6d8796635ea8d287b5c51a12316d58/strands_agents-1.28.0-py3-none-any.whl", hash = "sha256:e4c238811949b4f8d31ea9df03a74a57afa5f1728a23bf1ddbf8703f34addc6b", size = 355636, upload-time = "2026-02-25T19:36:45.075Z" },
+]
+
+[package.optional-dependencies]
+ollama = [
+    { name = "ollama" },
 ]
 
 [[package]]
