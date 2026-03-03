@@ -5,7 +5,7 @@
     "": {
       "name": "basic-langchain-agent",
       "dependencies": {
-        "@friskai/frisk-js": "^0.2.0",
+        "@friskai/frisk-js": "^0.2.1",
         "@langchain/anthropic": "^1.3.20",
         "@langchain/aws": "^1.2.5",
         "@langchain/ollama": "^1.2.4",
@@ -116,7 +116,7 @@
 
     "@cfworker/json-schema": ["@cfworker/json-schema@4.1.1", "", {}, "sha512-gAmrUZSGtKc3AiBL71iNWxDsyUC5uMaKKGdvzYsBoTW/xi42JQHl7eKV2OYzCUqvc+D2RCcf7EXY2iCyFIk6og=="],
 
-    "@friskai/frisk-js": ["@friskai/frisk-js@0.2.0", "", { "dependencies": { "@grpc/grpc-js": "^1.12.6", "@opentelemetry/exporter-trace-otlp-grpc": "^0.212.0", "@opentelemetry/sdk-node": "^0.212.0", "@opentelemetry/sdk-trace-node": "^2.5.1", "uuid": "^10.0.0", "zod": "^4.3.6" }, "peerDependencies": { "@anthropic-ai/claude-agent-sdk": "^0.2.0", "@langchain/core": ">=1.0.0", "@langchain/langgraph": ">=1.0.0", "@opentelemetry/api": ">=1.0.0", "langchain": "^1.2.19" }, "optionalPeers": ["@anthropic-ai/claude-agent-sdk", "@langchain/core", "@langchain/langgraph", "langchain"] }, "sha512-EH77H12qPDVJrjjoXYWDsMmYBo6icE6dVBuDTOrBpbNXxkOHqHzVBgkcmwg+KlKkj8qNikMmET3PruRCtqYAxQ=="],
+    "@friskai/frisk-js": ["@friskai/frisk-js@0.2.1", "", { "dependencies": { "@grpc/grpc-js": "^1.12.6", "@opentelemetry/exporter-trace-otlp-grpc": "^0.212.0", "@opentelemetry/sdk-node": "^0.212.0", "@opentelemetry/sdk-trace-node": "^2.5.1", "uuid": "^10.0.0", "zod": "^4.3.6" }, "peerDependencies": { "@anthropic-ai/claude-agent-sdk": "^0.2.0", "@langchain/core": ">=1.0.0", "@langchain/langgraph": ">=1.0.0", "@opentelemetry/api": ">=1.0.0", "langchain": "^1.2.19" }, "optionalPeers": ["@anthropic-ai/claude-agent-sdk", "@langchain/core", "@langchain/langgraph", "langchain"] }, "sha512-JRoMmFHU3tQTMJDqg7okGonxJS6VjRjS9oFRP40k3pXn8z5GHmQBNS65KYw4k8W05E4l22kmEjQtTDSx+G2OuA=="],
 
     "@grpc/grpc-js": ["@grpc/grpc-js@1.14.3", "", { "dependencies": { "@grpc/proto-loader": "^0.8.0", "@js-sdsl/ordered-map": "^4.4.2" } }, "sha512-Iq8QQQ/7X3Sac15oB6p0FmUg/klxQvXLeileoqrTRGJYLV+/9tubbr9ipz0GKHjmXVsgFPo/+W+2cA8eNcR+XA=="],
 
