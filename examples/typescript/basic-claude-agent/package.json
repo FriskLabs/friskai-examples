@@ -1,5 +1,5 @@
 {
-  "name": "basic-langchain-agent",
+  "name": "basic-claude-agent",
   "version": "0.1.0",
   "description": "FriskAI basic langchain agent example",
   "type": "module",
