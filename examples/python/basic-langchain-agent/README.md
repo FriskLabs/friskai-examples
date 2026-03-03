@@ -11,7 +11,7 @@ This demo agent performs simple tasks using multiple tools:
 - **Username lookup**: returns username
 
 The agent is instrumented with FriskAI to provide full observability into tool calls, agent state, and execution flow.
-[.env.example](.env.example)
+
 ## Features
 
 ### FriskAI Integration
