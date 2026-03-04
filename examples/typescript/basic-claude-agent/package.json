@@ -1,7 +1,7 @@
 {
   "name": "basic-claude-agent",
   "version": "0.1.0",
-  "description": "FriskAI basic langchain agent example",
+  "description": "FriskAI basic Claude agent example",
   "type": "module",
   "private": true,
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.2.63",
-    "@friskai/frisk-js": "^0.2.1"
+    "@friskai/frisk-js": "^0.2.2"
   }
 }

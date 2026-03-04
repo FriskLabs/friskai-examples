@@ -6,7 +6,7 @@
       "name": "basic-langchain-agent",
       "dependencies": {
         "@anthropic-ai/claude-agent-sdk": "^0.2.63",
-        "@friskai/frisk-js": "^0.2.1",
+        "@friskai/frisk-js": "^0.2.2",
       },
       "devDependencies": {
         "@biomejs/biome": "^2.4.4",
@@ -38,7 +38,7 @@
 
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@2.4.5", "", { "os": "win32", "cpu": "x64" }, "sha512-Pmhv9zT95YzECfjEHNl3mN9Vhusw9VA5KHY0ZvlGsxsjwS5cb7vpRnHzJIv0vG7jB0JI7xEaMH9ddfZm/RozBw=="],
 
-    "@friskai/frisk-js": ["@friskai/frisk-js@0.2.1", "", { "dependencies": { "@grpc/grpc-js": "^1.12.6", "@opentelemetry/exporter-trace-otlp-grpc": "^0.212.0", "@opentelemetry/sdk-node": "^0.212.0", "@opentelemetry/sdk-trace-node": "^2.5.1", "uuid": "^10.0.0", "zod": "^4.3.6" }, "peerDependencies": { "@anthropic-ai/claude-agent-sdk": "^0.2.0", "@langchain/core": ">=1.0.0", "@langchain/langgraph": ">=1.0.0", "@opentelemetry/api": ">=1.0.0", "langchain": "^1.2.19" }, "optionalPeers": ["@anthropic-ai/claude-agent-sdk", "@langchain/core", "@langchain/langgraph", "langchain"] }, "sha512-JRoMmFHU3tQTMJDqg7okGonxJS6VjRjS9oFRP40k3pXn8z5GHmQBNS65KYw4k8W05E4l22kmEjQtTDSx+G2OuA=="],
+    "@friskai/frisk-js": ["@friskai/frisk-js@0.2.2", "", { "dependencies": { "@grpc/grpc-js": "^1.12.6", "@opentelemetry/exporter-trace-otlp-grpc": "^0.212.0", "@opentelemetry/sdk-node": "^0.212.0", "@opentelemetry/sdk-trace-node": "^2.5.1", "uuid": "^10.0.0", "zod": "^4.3.6" }, "peerDependencies": { "@anthropic-ai/claude-agent-sdk": "^0.2.0", "@langchain/core": ">=1.0.0", "@langchain/langgraph": ">=1.0.0", "@opentelemetry/api": ">=1.0.0", "langchain": "^1.2.19" }, "optionalPeers": ["@anthropic-ai/claude-agent-sdk", "@langchain/core", "@langchain/langgraph", "langchain"] }, "sha512-gwtygXDXzVp2KLWi6OTIG4NgXePLsijPWRsRzk3KGwI9UKapQ7WeSh3IuWy9PN0zRsgdIratmX4Gqi4gA9Hr8w=="],
 
     "@grpc/grpc-js": ["@grpc/grpc-js@1.14.3", "", { "dependencies": { "@grpc/proto-loader": "^0.8.0", "@js-sdsl/ordered-map": "^4.4.2" } }, "sha512-Iq8QQQ/7X3Sac15oB6p0FmUg/klxQvXLeileoqrTRGJYLV+/9tubbr9ipz0GKHjmXVsgFPo/+W+2cA8eNcR+XA=="],
 
