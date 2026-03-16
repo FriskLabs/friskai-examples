@@ -1,9 +1,9 @@
-from uuid_utils import UUID
 from tools import llm_tools
 from llm import get_llm
 from prompt import system_prompt
 from frisk_sdk.adapters.langchain import Frisk
 from langchain.agents import create_agent, AgentState
+from langgraph.checkpoint.memory import InMemorySaver
 
 
 class MyAgentState(AgentState):
@@ -20,5 +20,6 @@ def build_agent(
         system_prompt=system_prompt,
         state_schema=MyAgentState,
         middleware=[frisk.guard()],
+        checkpointer=InMemorySaver(),
     )
     return agent

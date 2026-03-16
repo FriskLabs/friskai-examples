@@ -19,3 +19,6 @@ strictListInference = true
 
 [tool.ty.environment]
 root = ["./src"]
+
+[tool.uv.sources]
+frisk-sdk = { path = "../../../../shango/crates/frisk_py", editable = true } # todo!
