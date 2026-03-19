@@ -121,7 +121,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "frisk-sdk", specifier = ">=0.2.5" },
+    { name = "frisk-sdk", specifier = ">=0.2.7" },
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "strands-agents", extras = ["ollama"], specifier = ">=0.2.0" },
     { name = "strands-agents-tools", specifier = ">=0.2.0" },
@@ -323,7 +323,7 @@ wheels = [
 
 [[package]]
 name = "frisk-sdk"
-version = "0.2.5"
+version = "0.2.7"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asyncio" },
@@ -338,14 +338,14 @@ dependencies = [
     { name = "requests" },
     { name = "strands-agents" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ac/24/583cfa2ce6b799a596376e529b4a706c49c425100e2b55c9fd32d202debd/frisk_sdk-0.2.5.tar.gz", hash = "sha256:8835bc4b619cbb4982d673627c6e8b200f629c902f70f88dde07fc32fc11c4b2", size = 267212, upload-time = "2026-03-17T23:48:10.638Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c6/9c/e04d627140540614787b9011f9ef69d72d50f3d031638719f1cb40b0dea5/frisk_sdk-0.2.7.tar.gz", hash = "sha256:11cda64d4b0fa9aa52163a3b9c980b22e17f4af7c4d22d67316be59748d4dee0", size = 267668, upload-time = "2026-03-19T23:06:08.35Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/15/49/278d1a3066749e806c891d8b245fa069990bf4727957001e312567d816e5/frisk_sdk-0.2.5-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:46a253a74bf2f5bb1f2bab56b01e1c980ad42d15b0bc9a8b25e0a2fd3cd6c143", size = 2367401, upload-time = "2026-03-17T23:47:59.47Z" },
-    { url = "https://files.pythonhosted.org/packages/7d/bc/935198af33bcd0f3e91c14e27168a6c13de5620616e89f786b82c5d52212/frisk_sdk-0.2.5-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:50466befa317b1f87c7cf3ebf2c634d2a3add525502a4d53ed409b9e22d2fba7", size = 2286572, upload-time = "2026-03-17T23:48:01.189Z" },
-    { url = "https://files.pythonhosted.org/packages/f7/ca/ca0f8ae50d89748ce6c211d9fdd0fadcf9341192403ee7b5e052d07b0d43/frisk_sdk-0.2.5-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f0029a872ce39ada15ed51129abce37a785a6504da736bf335b1cc52e4d3ed9f", size = 2534725, upload-time = "2026-03-17T23:48:02.656Z" },
-    { url = "https://files.pythonhosted.org/packages/02/50/00b51b98b8bd68d4bf07b58df159d7b4cb6abfba952bc0fcd6d0115b85ef/frisk_sdk-0.2.5-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:78426a1d68ab67655cd24f70dfe518c52f1ba7d25b6b9831f89b86ba8c533c86", size = 2553262, upload-time = "2026-03-17T23:48:04.465Z" },
-    { url = "https://files.pythonhosted.org/packages/fc/99/2747cf7c12d1d92a5dfded801f6833801b321fc20afc4b3e01cf00c01846/frisk_sdk-0.2.5-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:e32561485616a3ee452d96372b122e973b1cdfc8704dbfba563f64e6a635bdc2", size = 2716290, upload-time = "2026-03-17T23:48:06.161Z" },
-    { url = "https://files.pythonhosted.org/packages/71/df/4f982c7f8d238350a30a033a730a8a688ff9eb3c82edda92d95cf0241eb9/frisk_sdk-0.2.5-cp310-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:b124ca09fea59c9ff825bb80bf16ef77fbf9edc7fe44c0d09120ca1609eb6aba", size = 2787165, upload-time = "2026-03-17T23:48:07.507Z" },
+    { url = "https://files.pythonhosted.org/packages/ce/af/73e9827bca790bf9611b3a737ac1958a85278f2aa13cdee90a2face1c217/frisk_sdk-0.2.7-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:c2c0e7916dd65696265011856804814b9dc15f40a881d60ab07252259647b31d", size = 2367773, upload-time = "2026-03-19T23:05:57.201Z" },
+    { url = "https://files.pythonhosted.org/packages/e9/1a/16ffa9fe2d425a38dfe4a60ec4dee4472ed1f084088e679183dd2ac73240/frisk_sdk-0.2.7-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:ef0ba633170348083d5d3c7d20328722d97c95b7fbb4350f7199ecb1b8249ad9", size = 2286941, upload-time = "2026-03-19T23:05:58.872Z" },
+    { url = "https://files.pythonhosted.org/packages/20/39/8988ffaa50419fd2ed861ab6127f99212a4273d0ac2d80ceb6ac4058fb80/frisk_sdk-0.2.7-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:48e985b66df2bdccbfb488a3d864b2b5b032266c8c47b5f66fddf91e87c52a2f", size = 2535095, upload-time = "2026-03-19T23:06:00.642Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/b7/cd7a6b3af1366ef9d26b8f3e56288dcce7050285f6c1ff124cd5ed917d4c/frisk_sdk-0.2.7-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:5fae6c3efe3fb5d8fb9c31558243e9ac778f829ac90e3094241461b343e710e2", size = 2553636, upload-time = "2026-03-19T23:06:02.076Z" },
+    { url = "https://files.pythonhosted.org/packages/8c/8e/1ba4536131f604d7679634eb991908ce06e4e3ca945f2de54efb359ca445/frisk_sdk-0.2.7-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:14613293292eb6cd7117ad95485d75871d2dd50fd5489e64fa712af2fdb41096", size = 2716661, upload-time = "2026-03-19T23:06:03.71Z" },
+    { url = "https://files.pythonhosted.org/packages/3e/7c/16d436cc9c6edc92304a1c38e86af21a605bef9c3e294376dcb15757b8a8/frisk_sdk-0.2.7-cp310-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:4655e850c72dba76e4a98879347d371731d40469a1441c370aa0007049ec13d6", size = 2787542, upload-time = "2026-03-19T23:06:05.361Z" },
 ]
 
 [[package]]
