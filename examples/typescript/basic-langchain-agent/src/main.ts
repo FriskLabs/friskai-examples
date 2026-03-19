@@ -59,7 +59,6 @@ class DemoRunner {
 
     while (true) {
       const session = this.frisk.session()
-        // console.log({ input }) // todo!
       const stream = await this.agent.stream(input, {
         callbacks: [session.callbacks],
         context: session.context,
