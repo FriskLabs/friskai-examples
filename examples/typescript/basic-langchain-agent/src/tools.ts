@@ -45,6 +45,7 @@ export const wordCount = tool(
 
 export const readSnippet = tool(
   (input: { path: string; maxChars?: number }) => {
+      console.log({ input })
     const maxCharacters = input.maxChars ?? 240
     const filePath = resolve(process.cwd(), 'src', input.path)
 

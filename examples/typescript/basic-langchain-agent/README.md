@@ -31,6 +31,7 @@ The agent is instrumented with FriskAI to provide observability, session managem
 - **Multi-LLM Support**: Supports OpenAI, Amazon Bedrock, Anthropic, or Ollama
 - **Streaming Output**: Real-time streaming of agent responses
 - **Tool Calling**: Multi-step reasoning with tool usage
+- **Checkpointed Resume**: Uses LangGraph checkpointing plus a stable `thread_id` to preserve memory while retrying escalated tool calls
 
 ## Prerequisites
 
@@ -48,6 +49,8 @@ The agent is instrumented with FriskAI to provide observability, session managem
    ```bash
    bun install
    ```
+
+   This example is currently pinned to the local Frisk JS worktree at `/Users/jonathanikpeazu/Documents/fabricos/repos/shango/crates/frisk_js` so it can use the in-progress escalation polling implementation.
 
 2. **Configure environment variables:**
    ```bash
