@@ -76,7 +76,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "frisk-sdk", editable = "../../../../shango/crates/frisk_py" },
+    { name = "frisk-sdk", specifier = ">=0.2.6" },
     { name = "langchain", specifier = ">=1.2.3" },
     { name = "langchain-anthropic", specifier = ">=0.3.0" },
     { name = "langchain-aws", specifier = ">=1.2.0" },
@@ -259,8 +259,8 @@ wheels = [
 
 [[package]]
 name = "frisk-sdk"
-version = "0.2.5"
-source = { editable = "../../../../shango/crates/frisk_py" }
+version = "0.2.6"
+source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asyncio" },
     { name = "cuid2" },
@@ -274,29 +274,14 @@ dependencies = [
     { name = "requests" },
     { name = "strands-agents" },
 ]
-
-[package.metadata]
-requires-dist = [
-    { name = "asyncio", specifier = ">=4.0.0" },
-    { name = "cuid2", specifier = ">=2.0.1" },
-    { name = "langchain", specifier = ">=1.0.0" },
-    { name = "langchain-core", specifier = ">=1.0.0" },
-    { name = "langchain-openai", specifier = ">=1.0.0" },
-    { name = "langgraph", specifier = ">=1.0.0" },
-    { name = "opentelemetry-exporter-otlp-proto-grpc", specifier = ">=1.38.0" },
-    { name = "opentelemetry-sdk", specifier = ">=1.38.0" },
-    { name = "pydantic", specifier = ">=2.12.3" },
-    { name = "requests", specifier = ">=2.31.0" },
-    { name = "strands-agents", specifier = ">=1.28.0" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pyright", specifier = ">=1.1.407" },
-    { name = "pytest", specifier = ">=8.0.0" },
-    { name = "pytest-asyncio", specifier = ">=0.23.0" },
-    { name = "pytest-cov", specifier = ">=5" },
-    { name = "ruff", specifier = ">=0.14.2" },
+sdist = { url = "https://files.pythonhosted.org/packages/e7/c9/81fca7715c6998df05df4059328af989d4517dedd523a61c891ed4cb0e92/frisk_sdk-0.2.6.tar.gz", hash = "sha256:0cd49008ee1d2fe38fb9dd7f28ade001b8d50e3449f5851620eab53d7c122a8c", size = 267373, upload-time = "2026-03-19T00:15:06.799Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/13/4a/e9c1fc2c14991ea1e1c109b73c0ae8002c3b4b31eef9b259d0e03ecc09b0/frisk_sdk-0.2.6-cp310-abi3-macosx_10_12_x86_64.whl", hash = "sha256:18fe0ea2643e405ab4487bb09607288175596a10892fcd2f7d92a1f51cfe16e2", size = 2367566, upload-time = "2026-03-19T00:14:57.133Z" },
+    { url = "https://files.pythonhosted.org/packages/2d/ac/45f3eebab1412a43ef3262ec0309523e8cf5ddb2b75baece0c36782bf411/frisk_sdk-0.2.6-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:d7f77271849e593e7705dc4543f5b177a690e1f57313f4029e1d5d95a8f6d4db", size = 2286733, upload-time = "2026-03-19T00:14:58.476Z" },
+    { url = "https://files.pythonhosted.org/packages/13/22/83a3ff0f21fccf6433fc863f42b1447181f7563a45320874657280d3bad9/frisk_sdk-0.2.6-cp310-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:711a7ceedf40718fcd27b3e1bd677509d77c165ad3460ec3a0164520546ad0e3", size = 2534890, upload-time = "2026-03-19T00:14:59.736Z" },
+    { url = "https://files.pythonhosted.org/packages/20/7d/b8a1ea3dedbad52e4f4776dcc27b928b28d460953be97d5df754008ddf4b/frisk_sdk-0.2.6-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6e0e1f6a31c8d7b85e7df7be563cbccedd68c7a8ccf4ac0700249cf25d4f052e", size = 2553427, upload-time = "2026-03-19T00:15:01.293Z" },
+    { url = "https://files.pythonhosted.org/packages/ab/6b/1724cf98d56ef99699e63aac325195ec978d25746868c45de4ded9335028/frisk_sdk-0.2.6-cp310-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:03655abc1154169d5a5ecf479b304ded101e4c617fabb825920fe52081dd7790", size = 2716454, upload-time = "2026-03-19T00:15:02.644Z" },
+    { url = "https://files.pythonhosted.org/packages/35/94/252f4b150661643a6248a652301c3cf3b36d3602a7740ca6df458a3a3fd5/frisk_sdk-0.2.6-cp310-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:6c8a67e7c0e822aff147f222cc426b8cce248533e9bc3c90fe4fb70eb58cc8bd", size = 2787329, upload-time = "2026-03-19T00:15:04.035Z" },
 ]
 
 [[package]]
