@@ -34,71 +34,70 @@ class DemoRunner:
         *,
         thread_id: str,
         question: Optional[str] = None,
-        resume: Optional[Command] = None,
     ) -> None:
         """Run a demo interaction that forces the LLM to use multiple tools."""
-        frisk_session = self.frisk.session()
+        # Initialize input for the first iteration
 
-        # Handle human-in-the-loop interrupts
-        if resume:
-            input = resume
-            print("Retrying escalated tool calls...")
-        else:
-            user_input = question or DEFAULT_PROMPT
-            print("User input:", user_input)
-            print("\nLLM answer: ", end="", flush=True)
-            input = {
-                "messages": [HumanMessage(content=user_input)],
-                "user_id": "42",
-                "redact_me": "true",
-            }
+        # Loop to handle retries without recursion
+        resume = None
+        while True:
+            if resume:
+                input = resume
+                print("Retrying escalated tool calls...")
+            else:
+                user_input = question or DEFAULT_PROMPT
+                print("User input:", user_input)
+                print("\nLLM answer: ", end="", flush=True)
+                input = {
+                    "messages": [HumanMessage(content=user_input)],
+                    "user_id": "42",
+                    "redact_me": "true",
+                }
+            resume = None
+            frisk_session = self.frisk.session()
 
-        next_resume = None
-        for event in self.agent.stream(
-            input,  # type: ignore
-            config={"callbacks": [frisk_session.callbacks], "configurable": {"thread_id": thread_id}},
-            context=frisk_session.context,  # type: ignore
-            stream_mode=["messages", "updates"],
-        ):
-            stream_mode, chunk = event
+            for event in self.agent.stream(
+                input,  # type: ignore
+                config={"callbacks": [frisk_session.callbacks], "configurable": {"thread_id": thread_id}},
+                context=frisk_session.context,  # type: ignore
+                stream_mode=["messages", "updates"],
+            ):
+                stream_mode, chunk = event
 
-            # Adjust this logic depending on the exact shape of your interrupt/update payloads
-            if stream_mode == "updates":
-                if isinstance(chunk, dict) and "__interrupt__" in chunk:
-                    interrupt_data = chunk["__interrupt__"][0].value
-                    if interrupt_data.get("__frisk"):
-                        _message = interrupt_data.get("message", "")
-                        escalated_tool_calls = interrupt_data.get("escalated_tool_calls", [])
-                        next_resume = Command(
-                            resume={tool_call_id: "retry" for tool_call_id in escalated_tool_calls.keys()} # Can simply pass in an empty dict here.
-                        )
+                # Adjust this logic depending on the exact shape of your interrupt/update payloads
+                if stream_mode == "updates":
+                    if isinstance(chunk, dict) and "__interrupt__" in chunk:
+                        interrupt_data = chunk["__interrupt__"][0].value
+                        if interrupt_data.get("__frisk"):
+                            _message = interrupt_data.get("message", "")
+                            escalated_tool_calls = interrupt_data.get("escalated_tool_calls", [])
+                            resume = Command(
+                                resume={tool_call_id: "retry" for tool_call_id in escalated_tool_calls.keys()} # Can simply pass in an empty dict here.
+                            )
 
-            elif stream_mode == "messages":
-                message = chunk[0]
-                metadata = chunk[1]
-                if metadata.get("langgraph_node") == "model" and hasattr(message, "content"):
-                    content = message.content
-                    if isinstance(content, str) and content:
-                        print(content, end="", flush=True)
-                    elif isinstance(content, list):
-                        for item in content:
-                            if isinstance(item, dict) and item.get("type") == "text":
-                                print(item.get("text", ""), end="", flush=True)
-        print()  # New line after streaming
+                elif stream_mode == "messages":
+                    message = chunk[0]
+                    metadata = chunk[1]
+                    if metadata.get("langgraph_node") == "model" and hasattr(message, "content"):
+                        content = message.content
+                        if isinstance(content, str) and content:
+                            print(content, end="", flush=True)
+                        elif isinstance(content, list):
+                            for item in content:
+                                if isinstance(item, dict) and item.get("type") == "text":
+                                    print(item.get("text", ""), end="", flush=True)
+            print()  # New line after streaming
 
-        if next_resume:
-            print(
-                f"Some tool calls were escalated. Trying again in {INTERRUPT_POLLING_INTERVAL_SECONDS} seconds..."
-            )
-            time.sleep(INTERRUPT_POLLING_INTERVAL_SECONDS)
-            self.run(resume=next_resume, thread_id=thread_id)
-        else:
-            self.frisk.shutdown()
+            if resume:
+                print(
+                    f"Some tool calls were escalated. Trying again in {INTERRUPT_POLLING_INTERVAL_SECONDS} seconds..."
+                )
+                time.sleep(INTERRUPT_POLLING_INTERVAL_SECONDS)
+                input = resume
+            else:
+                break
 
-
-def demo_run(*, question: Optional[str] = None, resume: Optional[Command] = None, thread_id: str) -> None:
-    """Backward-compatible wrapper around DemoRunner."""
-    DemoRunner().run(question=question, resume=resume, thread_id=thread_id)
+        self.frisk.shutdown()
 
 
 if __name__ == "__main__":
@@ -107,4 +106,4 @@ if __name__ == "__main__":
     question = None
     if len(sys.argv) > 1:
         question = sys.argv[1]
-    demo_run(question=question, thread_id="in_memory_thread")
+    DemoRunner().run(question=question, thread_id="in_memory_thread")
