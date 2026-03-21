@@ -7,7 +7,7 @@ export function getLLM() {
   const provider = (process.env.LLM_PROVIDER || '').toLowerCase()
 
   if (provider === 'openai') {
-    let model = process.env.OPENAI_MODEL || 'gpt-5-nano';
+    const model = process.env.OPENAI_MODEL || 'gpt-5-nano'
     console.log(`Using OpenAI LLM (LLM_PROVIDER=openai). Using model ${model}.`)
     return new ChatOpenAI({
       model,
