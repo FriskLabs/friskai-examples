@@ -32,23 +32,21 @@ class DemoRunner:
     def run(
         self,
         *,
-        thread_id: str,
         question: Optional[str] = None,
     ) -> None:
         """Run a demo interaction that forces the LLM to use multiple tools."""
-        # Initialize input for the first iteration
-
         # Loop to handle retries without recursion
+        thread_id="in_memory_thread"
         resume = None
         while True:
             if resume:
-                input = resume
+                agent_input = resume
                 print("Retrying escalated tool calls...")
             else:
                 user_input = question or DEFAULT_PROMPT
                 print("User input:", user_input)
                 print("\nLLM answer: ", end="", flush=True)
-                input = {
+                agent_input = {
                     "messages": [HumanMessage(content=user_input)],
                     "user_id": "42",
                     "redact_me": "true",
@@ -57,7 +55,7 @@ class DemoRunner:
             frisk_session = self.frisk.session()
 
             for event in self.agent.stream(
-                input,  # type: ignore
+                agent_input,  # type: ignore
                 config={"callbacks": [frisk_session.callbacks], "configurable": {"thread_id": thread_id}},
                 context=frisk_session.context,  # type: ignore
                 stream_mode=["messages", "updates"],
@@ -70,7 +68,7 @@ class DemoRunner:
                         interrupt_data = chunk["__interrupt__"][0].value
                         if interrupt_data.get("__frisk"):
                             _message = interrupt_data.get("message", "")
-                            escalated_tool_calls = interrupt_data.get("escalated_tool_calls", [])
+                            escalated_tool_calls = interrupt_data.get("escalated_tool_calls", {})
                             resume = Command(
                                 resume={tool_call_id: "retry" for tool_call_id in escalated_tool_calls.keys()} # Can simply pass in an empty dict here.
                             )
@@ -93,7 +91,7 @@ class DemoRunner:
                     f"Some tool calls were escalated. Trying again in {INTERRUPT_POLLING_INTERVAL_SECONDS} seconds..."
                 )
                 time.sleep(INTERRUPT_POLLING_INTERVAL_SECONDS)
-                input = resume
+                agent_input = resume
             else:
                 break
 
@@ -106,4 +104,4 @@ if __name__ == "__main__":
     question = None
     if len(sys.argv) > 1:
         question = sys.argv[1]
-    DemoRunner().run(question=question, thread_id="in_memory_thread")
+    DemoRunner().run(question=question)
