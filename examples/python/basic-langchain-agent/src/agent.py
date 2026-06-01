@@ -1,7 +1,7 @@
 from tools import llm_tools
 from llm import get_llm
 from prompt import system_prompt
-from frisk_sdk.adapters.langchain import Frisk
+from frisk_sdk.adapters.langchain import FriskLangchain as Frisk
 from langchain.agents import create_agent, AgentState
 from langgraph.checkpoint.memory import InMemorySaver
 
@@ -11,12 +11,12 @@ class MyAgentState(AgentState):
     redact_me: str
 
 
-def build_agent(
+async def build_agent(
     frisk: Frisk,
 ):
     agent = create_agent(
         model=get_llm(),
-        tools=frisk.wrap_tools(llm_tools),
+        tools=await frisk.wrap_tools(llm_tools),
         system_prompt=system_prompt,
         state_schema=MyAgentState,
         middleware=[frisk.guard()],

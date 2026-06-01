@@ -1,8 +1,8 @@
 import os
-import time
+import asyncio
 
 from dotenv import load_dotenv
-from frisk_sdk.adapters.langchain import Frisk
+from frisk_sdk.adapters.langchain import FriskLangchain as Frisk
 from langgraph.types import Command
 
 from agent import build_agent
@@ -27,9 +27,9 @@ class DemoRunner:
             api_key=os.getenv("FRISK_API_KEY", ""),
             redact={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
         )
-        self.agent = build_agent(frisk=self.frisk)
+        self.agent = asyncio.run(build_agent(frisk=self.frisk))
 
-    def run(
+    async def run(
         self,
         *,
         question: Optional[str] = None,
@@ -54,7 +54,7 @@ class DemoRunner:
             resume = None
             frisk_session = self.frisk.session()
 
-            for event in self.agent.stream(
+            async for event in self.agent.astream(
                 agent_input,  # type: ignore
                 config={"callbacks": [frisk_session.callbacks], "configurable": {"thread_id": thread_id}},
                 context=frisk_session.context,  # type: ignore
@@ -90,7 +90,7 @@ class DemoRunner:
                 print(
                     f"Some tool calls were escalated. Trying again in {INTERRUPT_POLLING_INTERVAL_SECONDS} seconds..."
                 )
-                time.sleep(INTERRUPT_POLLING_INTERVAL_SECONDS)
+                await asyncio.sleep(INTERRUPT_POLLING_INTERVAL_SECONDS)
                 agent_input = resume
             else:
                 break
@@ -104,4 +104,4 @@ if __name__ == "__main__":
     question = None
     if len(sys.argv) > 1:
         question = sys.argv[1]
-    DemoRunner().run(question=question)
+    asyncio.run(DemoRunner().run(question=question))

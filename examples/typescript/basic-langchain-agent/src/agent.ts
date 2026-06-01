@@ -26,7 +26,9 @@ export function buildAgent(frisk: Frisk) {
     ),
     systemPrompt,
     stateSchema: agentStateSchema,
-    middleware: [frisk.guard({ stateSchema: agentStateSchema })],
+    middleware: [
+      frisk.guard({ stateSchema: agentStateSchema })
+    ],
     checkpointer: new MemorySaver(),
   })
 
