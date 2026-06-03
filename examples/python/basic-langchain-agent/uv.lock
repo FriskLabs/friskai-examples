@@ -67,7 +67,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "frisk-sdk", specifier = ">=0.3.0" },
+    { name = "frisk-sdk", specifier = ">=0.3.1" },
     { name = "langchain", specifier = ">=1.2.3" },
     { name = "langchain-anthropic", specifier = ">=0.3.0" },
     { name = "langchain-aws", specifier = ">=1.2.0" },
@@ -250,7 +250,7 @@ wheels = [
 
 [[package]]
 name = "frisk-sdk"
-version = "0.3.0"
+version = "0.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cuid2" },
@@ -265,7 +265,7 @@ dependencies = [
     { name = "strands-agents" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6a/32/b0404701440b2199571922067aabc2730b2cb3f9e5956473c802e0291d87/frisk_sdk-0.3.0-py3-none-any.whl", hash = "sha256:b0e74bed7c2be8bcdcfaa43d2d350e7710a2f86c77bcc34f1d2e8362937bcf67", size = 83770, upload-time = "2026-06-01T00:41:40.555Z" },
+    { url = "https://files.pythonhosted.org/packages/af/f4/2a9c1cbb429849483ad531a45a48873a587126a4a48721111856c3c4cba7/frisk_sdk-0.3.1-py3-none-any.whl", hash = "sha256:876c75dbc4c92aea55bcec410b0241a1334e9e47b1055effad3f906da094a4a1", size = 85172, upload-time = "2026-06-03T06:14:10.78Z" },
 ]
 
 [[package]]
