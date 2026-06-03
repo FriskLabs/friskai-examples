@@ -1,0 +1,22 @@
+[project]
+name = "basic-langgraph-agent"
+version = "0.1.0"
+description = "FriskAI basic langgraph agent example"
+readme = "README.md"
+requires-python = "==3.13.*"
+dependencies = [
+    "langgraph>=1.2.4",
+    "langchain>=1.2.3",
+    "langchain-ollama>=1.0.1",
+    "langchain-openai>=1.1.7",
+    "langchain-aws>=1.2.0",
+    "langchain-anthropic>=0.3.0",
+    "frisk-sdk>=0.3.0",
+    "python-dotenv>=1.2.1",
+]
+
+[tool.pyright]
+strictListInference = true
+
+[tool.ty.environment]
+root = ["./src"]
