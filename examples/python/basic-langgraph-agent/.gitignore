@@ -1,0 +1,7 @@
+# Local checkpointer stores (created at runtime by the SQLite checkpointer)
+checkpoints.sqlite
+checkpoints.sqlite-shm
+checkpoints.sqlite-wal
+interrupt_checkpoints.sqlite
+interrupt_checkpoints.sqlite-shm
+interrupt_checkpoints.sqlite-wal
