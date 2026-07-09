@@ -5,15 +5,18 @@ The agent is built with ``require_approval=True``, so it pauses (via LangGraph's
 checkpointer saves that paused state, you approve or reject it in a *separate*
 process run by resuming with ``Command(resume=...)``.
 
-    python src/interrupt_demo.py            # turn 1: agent pauses awaiting approval
-    python src/interrupt_demo.py approve    # resume and let the tool run
-    python src/interrupt_demo.py reject     # (alternative) resume and deny the tool
+    python src/interrupt_demo.py                                # turn 1: agent pauses awaiting approval
+    python src/interrupt_demo.py approve --thread_id <id>       # resume and let the tool run
+    python src/interrupt_demo.py reject --thread_id <id>        # (alternative) resume and deny the tool
 
+A random 5-character thread_id is generated unless ``--thread_id`` is given.
 Delete ``interrupt_checkpoints.sqlite`` to start the demo over.
 """
 
 import os
 import asyncio
+import random
+import string
 from typing import Optional
 
 from dotenv import load_dotenv
@@ -26,8 +29,11 @@ from agent import build_agent
 
 load_dotenv()
 
-THREAD_ID = "approval_chat"
 CHECKPOINT_DB = "interrupt_checkpoints.sqlite"
+
+
+def generate_thread_id() -> str:
+    return "".join(random.choices(string.ascii_lowercase + string.digits, k=5))
 
 # A prompt that reliably triggers a tool call (log_message), so the approval
 # gate has something to pause on.
@@ -43,17 +49,17 @@ class InterruptDemoRunner:
             redact={"redact_tool_args": ["path"], "redact_agent_state": ["redact_me"]},
         )
 
-    async def run(self, *, arg: Optional[str] = None) -> None:
+    async def run(self, *, thread_id: str, arg: Optional[str] = None) -> None:
         async with AsyncSqliteSaver.from_conn_string(CHECKPOINT_DB) as saver:
             agent = await build_agent(
                 frisk=self.frisk, checkpointer=saver, require_approval=True
             )
-            config = {"configurable": {"thread_id": THREAD_ID}}
+            config = {"configurable": {"thread_id": thread_id}}
 
             state = await agent.aget_state(config)
             paused = bool(state.interrupts)
 
-            frisk_session = self.frisk.session()
+            frisk_session = self.frisk.session(thread_id=thread_id)
             stream_config = {"callbacks": [frisk_session.callbacks], **config}
 
             if paused:
@@ -67,7 +73,7 @@ class InterruptDemoRunner:
             else:
                 # Fresh conversation. The CLI arg (if any) is a custom prompt.
                 prompt = arg or INITIAL_PROMPT
-                print(f"--- Starting approval conversation (thread '{THREAD_ID}') ---")
+                print(f"--- Starting approval conversation (thread '{thread_id}') ---")
                 print("User input:", prompt)
                 stream_input = {
                     "messages": [HumanMessage(content=prompt)],
@@ -101,15 +107,39 @@ class InterruptDemoRunner:
                     print(f"  - {tc['name']}({tc['args']})")
                 print(
                     "Run again to decide:\n"
-                    "  python src/interrupt_demo.py approve\n"
-                    "  python src/interrupt_demo.py reject"
+                    f"  python src/interrupt_demo.py approve --thread_id {thread_id}\n"
+                    f"  python src/interrupt_demo.py reject --thread_id {thread_id}"
                 )
 
             self.frisk.shutdown()
 
 
 if __name__ == "__main__":
-    import sys
+    import argparse
 
-    arg = sys.argv[1] if len(sys.argv) > 1 else None
-    asyncio.run(InterruptDemoRunner().run(arg=arg))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "arg",
+        nargs="?",
+        default=None,
+        help="'approve'/'reject' to resume a paused run, or a custom initial prompt",
+    )
+    parser.add_argument(
+        "--thread_id",
+        default=None,
+        help="Conversation thread id; generated randomly if omitted",
+    )
+    args = parser.parse_args()
+
+    if args.arg in ("approve", "reject", "deny") and args.thread_id is None:
+        parser.error(f"--thread_id is required when passing '{args.arg}'")
+
+    thread_id = args.thread_id or generate_thread_id()
+    asyncio.run(
+        InterruptDemoRunner().run(
+            thread_id=thread_id, arg=args.arg
+        )
+    )
+
+    print(f"\nThread ID for this run: {thread_id}")
+
