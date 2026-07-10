@@ -1,0 +1,2 @@
+python=/path/to/sdk_repo/crates/frisk_py
+typescript=/path/to/sdk_repo/crates/frisk_js
