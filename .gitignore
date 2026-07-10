@@ -6,6 +6,9 @@ dist/
 wheels/
 *.egg-info
 
+# local SDK checkout paths (machine-specific)
+sdk-versions.local.txt
+
 # dotenv environment variable files
 .env
 .env.development.local

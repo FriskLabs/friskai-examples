@@ -1,0 +1,2 @@
+python=/path/to/shango/crates/frisk_py
+typescript=/path/to/shango/crates/frisk_js

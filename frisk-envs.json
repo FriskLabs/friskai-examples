@@ -1,0 +1,10 @@
+{
+  "staging": {
+    "FRISK_BASE_URL": "https://api.frsk.click",
+    "FRISK_TELEMETRY_ENDPOINT": "https://t.frsk.click"
+  },
+  "production": {
+    "FRISK_BASE_URL": "TODO",
+    "FRISK_TELEMETRY_ENDPOINT": "TODO"
+  }
+}
