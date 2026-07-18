@@ -19,7 +19,7 @@
     "@ai-sdk/amazon-bedrock": "^5.0.23",
     "@ai-sdk/anthropic": "^4.0.15",
     "@ai-sdk/openai": "^4.0.15",
-    "@friskai/frisk-js": "file:../../../../shango/crates/frisk_js",
+    "@friskai/frisk-js": "^0.3.8",
     "@mastra/core": "^1.51.0",
     "@mastra/libsql": "^1.16.0",
     "@mastra/memory": "^1.23.0",

@@ -4,7 +4,7 @@ import { buildMastra } from './agent.js'
 
 // A fixed thread id plus an on-disk LibSQL store means every run continues the
 // SAME conversation, even across separate processes.
-const THREAD_ID = 'mastra_chati2'
+const THREAD_ID = 'mastra_chat'
 const RESOURCE_ID = 'user_42'
 
 // Scripted turns that demonstrate memory carrying context forward. Turn 2 needs
@@ -31,18 +31,13 @@ async function completedTurns(memory: Memory): Promise<number> {
 }
 
 async function run(question?: string): Promise<void> {
-  // Equivalent to the documented `Frisk.connect(options)` factory, which is
-  // exactly `new Frisk(options)` + `await connect()`. The two-step form is used
-  // because the static factory's generic `this` signature does not typecheck
-  // against the Mastra `Frisk` subclass (an SDK issue, not a usage error).
-  const frisk = new Frisk({
+  const frisk = await Frisk.connect({
     apiKey: process.env.FRISK_API_KEY || '',
     redact: {
       redactToolArgs: ['path'],
       redactAgentState: ['redactMe'],
     },
   })
-  await frisk.connect()
 
   try {
     const { agent, memory } = buildMastra(frisk)

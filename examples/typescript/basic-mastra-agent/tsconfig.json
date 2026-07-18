@@ -23,18 +23,6 @@
     // Some stricter flags (disabled by default)
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noPropertyAccessFromIndexSignature": false,
-
-    // @friskai/frisk-js is consumed from the local SDK checkout (see package.json),
-    // whose own repo also has an @mastra/core install. Without this mapping, tsc
-    // resolves the SDK's @mastra/core types to that other copy and reports
-    // spurious "two different Tool types" errors. Pin every @mastra/core type
-    // lookup to this example's single copy. Remove once the Mastra adapter ships
-    // on npm and the dependency becomes a normal version range.
-    "baseUrl": ".",
-    "paths": {
-      "@mastra/core": ["./node_modules/@mastra/core"],
-      "@mastra/core/*": ["./node_modules/@mastra/core/*"]
-    }
+    "noPropertyAccessFromIndexSignature": false
   }
 }

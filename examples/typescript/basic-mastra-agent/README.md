@@ -21,9 +21,9 @@ FriskAI's Mastra adapter integrates at three points:
 
 - **Exporter** — `frisk.exporter()` is registered once on the `Mastra` instance's
   `Observability`, so every agent run emits telemetry to FriskAI.
-- **Tool wrapping** — `frisk.wrapTools()` instruments each tool to capture the
-  model's reasoning for the call. (Mastra's `Agent.tools` is a record keyed by
-  tool id, so the wrapped array is converted to a record.)
+- **Tool wrapping** — `frisk.wrapToolset()` instruments each tool to capture the
+  model's reasoning for the call and returns the id-keyed record Mastra's
+  `Agent.tools` expects.
 - **Session** — `frisk.session({ threadId })` produces `tracingOptions` that are
   spread into each `agent.stream()` call to attach that run to a FriskAI session.
 
@@ -40,7 +40,7 @@ therefore continues across separate `bun run` invocations — turn 2 recalls tur
 
 ### FriskAI Integration
 - **Session Management**: A FriskAI session per turn
-- **Tool Wrapping**: `frisk.wrapTools` reasoning capture
+- **Tool Wrapping**: `frisk.wrapToolset` reasoning capture
 - **Observability Exporter**: telemetry for every agent run
 - **Data Redaction**: redact tool args (`path`) and agent state (`redactMe`)
 
@@ -56,24 +56,9 @@ therefore continues across separate `bun run` invocations — turn 2 recalls tur
 - FriskAI API key
 - LLM provider credentials (OpenAI, Anthropic, AWS for Bedrock, or a local Ollama)
 
-- A local checkout of the FriskAI JS SDK (see the note below)
-
-> **Important:** The FriskAI Mastra adapter is not published to npm yet — the
-> latest published `@friskai/frisk-js` (0.3.6) has no `/mastra` export. This
-> example therefore consumes the SDK from a local checkout:
->
-> ```json
-> "@friskai/frisk-js": "file:../../../../shango/crates/frisk_js"
-> ```
->
-> This assumes the `shango` repository is checked out alongside this one (both
-> under the same parent directory) and has been built (`dist/` present).
-> `tsconfig.json` also pins `@mastra/core` type resolution to this example's copy
-> — see the comment there for why.
->
-> Once `@friskai/frisk-js >= 0.3.7` is published to npm, replace the dependency
-> with a normal version range (e.g. `"^0.3.7"`, as `basic-langchain-agent` does)
-> and delete the `paths` block from `tsconfig.json`.
+> **Note:** The Mastra adapter requires `@friskai/frisk-js` **>= 0.3.8** (the
+> version that ships the `/mastra` export). This example depends on it as a
+> normal npm range, just like the other examples.
 
 ## Setup
 
