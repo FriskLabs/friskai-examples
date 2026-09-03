@@ -3,7 +3,7 @@ import os
 import asyncio
 from agent import build_agent
 from typing import Optional
-from frisk_sdk.adapters.strands import Frisk
+from frisk_sdk.adapters.strands import FriskStrands as Frisk
 
 load_dotenv()
 
@@ -23,7 +23,7 @@ async def demo_run(question: Optional[str] = None) -> None:
     frisk_session = frisk.session()
 
     """Run a demo interaction that forces the agent to use multiple tools."""
-    agent = build_agent(frisk=frisk)
+    agent = await build_agent(frisk=frisk)
     user_input = question or DEFAULT_PROMPT
     print("User input:", user_input)
     print("\nAgent answer: ", end="", flush=True)
