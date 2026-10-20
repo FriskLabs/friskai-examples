@@ -11,6 +11,10 @@ dependencies = [
     "frisk-sdk~=0.3.7",
 ]
 
+[tool.uv]
+# strands-agents-tools pins pillow<13, but pillow<13 has open security advisories.
+override-dependencies = ["pillow>=13.0.0"]
+
 [tool.pyright]
 strictListInference = true
 
